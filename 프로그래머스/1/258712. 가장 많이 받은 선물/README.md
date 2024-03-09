@@ -1,10 +1,10 @@
 # [level 1] 가장 많이 받은 선물 - 258712 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/258712?language=csharp) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/258712) 
 
 ### 성능 요약
 
-메모리: 32.2 MB, 시간: 7.47 ms
+메모리: 31.8 MB, 시간: 3.44 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 03월 05일 00:21:53
+2024년 03월 10일 00:44:16
 
 ### 문제 설명
 

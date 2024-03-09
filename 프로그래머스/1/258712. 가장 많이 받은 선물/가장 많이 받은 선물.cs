@@ -1,82 +1,46 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-public class Solution {
-    public int solution(string[] friends, string[] gifts) {
-        int friendsCount = friends.Length;
-                int[] giftIndex = new int[friendsCount];
-                int[] giftCount = new int[friendsCount];
+public class Solution
+{
+    public int solution(string[] friends, string[] gifts)
+    {
+        int answer = 0;
 
-                Dictionary<string, int> histories = gifts.GroupBy(gift => gift).ToDictionary(g => g.Key, g => g.Count());
+        var dict = new Dictionary<string, int>(); // 친구이름에 따른 인덱스 값
+        for(int i = 0; i < friends.Length; i++)
+            dict.Add(friends[i], i);
 
-                foreach(var history in histories)
-                {
-                    string[] pair = history.Key.Split(" ");
+        var intArray = new int[friends.Length]; // 선물 지수 배열
+        var giftArrays = new int[friends.Length, friends.Length]; // 선물 현황 배열 [준 사람, 받은 사람]
 
-                    int give = Array.IndexOf(friends, pair[0]);
-                    int take = Array.IndexOf(friends, pair[1]);
+        // 선물 지수 배열과 선물 현환 배열에 값 세팅
+        for(int i = 0; i < gifts.Length; i++)
+        {
+            string[] strs = gifts[i].Split(' '); // 0 : 준 사람, 1 : 받은 사람
+            giftArrays[dict[strs[0]], dict[strs[1]]]++;
+            intArray[dict[strs[0]]]--;
+            intArray[dict[strs[1]]]++;
+        }
 
-                    giftIndex[give] += history.Value;
-                    giftIndex[take] -= history.Value;
-                }
+        for(int i = 0; i < intArray.Length; i++)
+        {
+            int num = 0; // 선물 받은 개수
+            for(int j = 0; j < intArray.Length; j++)
+            {
+                if(i == j)
+                    continue;
 
-                for (int i = 0; i < friendsCount - 1; i++)
-                {
-                    for (int j = i + 1; j < friendsCount; j++)
-                    {
-                        string key = friends[i] + " " + friends[j];
-                        string counterKey = friends[j] + " " + friends[i];
+                // 선물을 받아야 하는 조건
+                if(giftArrays[j, i] < giftArrays[i, j]
+                  || (giftArrays[j, i] == giftArrays[i, j] && intArray[i] < intArray[j])) 
+                    num++;
+            }
 
-                        if (histories.ContainsKey(key) == true && histories.ContainsKey(counterKey) == true)
-                        {
-                            if (giftIndex[i] == giftIndex[j]) continue;
+            if(answer < num)
+                answer = num;
+        }
 
-                            if (histories[key] > histories[counterKey])
-                            {
-                                giftCount[i]++;
-                            }
-                            else if (histories[key] < histories[counterKey])
-                            {
-                                giftCount[j]++;
-                            }
-                            else if (giftIndex[i] > giftIndex[j])
-                            {
-                                giftCount[i]++;
-                            }
-                            else
-                            {
-                                giftCount[j]++;
-                            }
-                        }
-                        else if(histories.ContainsKey(key) == false && histories.ContainsKey(counterKey) == false)
-                        {
-                            if (giftIndex[i] == giftIndex[j]) continue;
-
-                            if (giftIndex[i] > giftIndex[j])
-                            {
-                                giftCount[i]++;
-                            }
-                            else
-                            {
-                                giftCount[j]++;
-                            }
-                        }
-                        else
-                        {
-                            if(histories.ContainsKey(key) == true)
-                            {
-                                giftCount[i]++;
-                            }
-                            else
-                            {
-                                giftCount[j]++;
-                            }
-                        }
-                    }
-                }
-
-                int answer = giftCount.Max();
-                return answer;
+        return answer;
     }
 }
