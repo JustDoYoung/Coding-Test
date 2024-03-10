@@ -1,46 +1,43 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-public class Solution
-{
-    public int solution(string[] friends, string[] gifts)
-    {
-        int answer = 0;
+public class Solution {
+    public int solution(string[] friends, string[] gifts) {
+         int answer = 0;
 
-        var dict = new Dictionary<string, int>(); // 친구이름에 따른 인덱스 값
-        for(int i = 0; i < friends.Length; i++)
-            dict.Add(friends[i], i);
+ int friendsCount = friends.Length;
+ int[] giftIndex = new int[friendsCount];
+ int[,] giftHistory= new int[friendsCount, friendsCount];
+ int[] giftCount = new int[friendsCount];
 
-        var intArray = new int[friends.Length]; // 선물 지수 배열
-        var giftArrays = new int[friends.Length, friends.Length]; // 선물 현황 배열 [준 사람, 받은 사람]
+ foreach(string gift in gifts)
+ {
+     string[] history = gift.Split(' ');
 
-        // 선물 지수 배열과 선물 현환 배열에 값 세팅
-        for(int i = 0; i < gifts.Length; i++)
-        {
-            string[] strs = gifts[i].Split(' '); // 0 : 준 사람, 1 : 받은 사람
-            giftArrays[dict[strs[0]], dict[strs[1]]]++;
-            intArray[dict[strs[0]]]--;
-            intArray[dict[strs[1]]]++;
-        }
+     int give = Array.IndexOf(friends, history[0]);
+     int take = Array.IndexOf(friends, history[1]);
 
-        for(int i = 0; i < intArray.Length; i++)
-        {
-            int num = 0; // 선물 받은 개수
-            for(int j = 0; j < intArray.Length; j++)
-            {
-                if(i == j)
-                    continue;
+     giftIndex[give]++;
+     giftIndex[take]--;
+     giftHistory[give, take]++;
+ }
 
-                // 선물을 받아야 하는 조건
-                if(giftArrays[j, i] < giftArrays[i, j]
-                  || (giftArrays[j, i] == giftArrays[i, j] && intArray[i] < intArray[j])) 
-                    num++;
-            }
+ for (int i = 0; i < friendsCount; i++)
+ {
+     for (int j = 0; j < friendsCount; j++)
+     {
+         if (i == j) continue;
 
-            if(answer < num)
-                answer = num;
-        }
+         if (giftHistory[i, j] > giftHistory[j, i] || (giftIndex[i] > giftIndex[j] && giftHistory[i, j] == giftHistory[j, i]))
+         {
+             giftCount[i]++;
+         }
+     }
+ }
 
-        return answer;
+ answer = giftCount.Max();
+
+ return answer;
     }
 }
