@@ -1,23 +1,28 @@
 using System;
-using System.Collections.Generic;
 
 public class Solution {
     public int[] solution(int k, int[] score) {
-         int length = score.Length;
+        int length = score.Length;
+int[] result = new int[length];
 
-                int[] answer = new int[length];
-                List<int> honor = new List<int>();
+for (int i = 0; i < length; i++)
+{
+   for (int j = i; j >= 1; j--)
+    {
+        if(score[j] > score[j - 1])
+        {
+            int temp = score[j];
+            score[j] = score[j - 1];
+            score[j - 1] = temp;
+        }
+    }
 
-                for (int i = 0; i < length; i++)
-                {
-                    honor.Add(score[i]);
-                    honor.Sort();
+    if (i < k)
+        result[i] = score[i];
+    else
+        result[i] = score[k - 1];
+}
 
-                    if (i < k)
-                        answer[i] = honor[0];
-                    else
-                        answer[i] = honor[i - k + 1];
-                }
-                return answer;
+return result;
     }
 }
