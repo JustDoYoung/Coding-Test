@@ -1,10 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Solution {
     public string[] solution(string[] players, string[] callings) {
-        Dictionary<string, int> playerDict = players.Select((value, index) => new { value, index }).ToDictionary(pair => pair.value, pair => pair.index);
+       int length = players.Length;
+
+Dictionary<string, int> playerDict = new Dictionary<string, int>();
+
+for(int i = 0; i < length; i++)
+{
+    playerDict.Add(players[i], i);
+}
 
 foreach(string calling in callings) 
 {
@@ -18,8 +24,15 @@ foreach(string calling in callings)
     playerDict[loserName] = temp;
 }
 
-string[] answer = playerDict.OrderBy(pair => pair.Value).Select(pair => pair.Key).ToArray();
+for(int i = 0; i < length; i++)
+{
+    int changeIndex = playerDict[players[i]];
 
-return answer;
+    string temp = players[i];
+    players[i] = players[changeIndex];
+    players[changeIndex] = temp;
+}
+
+return players;
     }
 }
