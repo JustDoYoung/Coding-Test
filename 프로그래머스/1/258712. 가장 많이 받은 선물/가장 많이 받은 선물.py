@@ -6,7 +6,7 @@ def solution(friends, gifts):
     gift_index = [0] * friends_length
     gift_count = [0] * friends_length
 
-    friends_dict = dict(zip(friends, list(range(0, friends_length))))
+    friends_dict = {name: index for index, name in enumerate(friends)}
 
     for give_and_take_history in gifts:
         split_give_and_take = give_and_take_history.split(" ")
