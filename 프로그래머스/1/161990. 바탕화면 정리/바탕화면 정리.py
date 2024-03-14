@@ -1,18 +1,11 @@
 def solution(wallpaper):
-    answer = [0] * 4
-
     file = [
         tuple(j for j, item in enumerate(wallpaper) if item.find("#") != -1),
-        tuple(
-            i for item in wallpaper for i, is_file in enumerate(item) if is_file == "#"
-        ),
+        tuple(i for item in wallpaper for i, is_file in enumerate(item) if is_file == "#"),
     ]
 
     j_axis = file[0]
     i_axis = file[1]
 
-    min_axis = (min(j_axis), min(i_axis))
-    max_axis = (max(j_axis) + 1, max(i_axis) + 1)
-
-    answer = [*min_axis, *max_axis]
+    answer = [min(j_axis), min(i_axis), max(j_axis) + 1, max(i_axis) + 1]
     return answer
