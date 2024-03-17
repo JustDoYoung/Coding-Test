@@ -1,20 +1,21 @@
 def solution(bandage, health, attacks):
-    wait_time = bandage[0]
-    heal_per_second = bandage[1]
-    heal_additional = bandage[2]
-    heal_full = heal_per_second * wait_time + heal_additional
-    full_hp = health
+    
+    # 설정 값 저장
+    WAIT_TIME = bandage[0]
+    HEAL_PER_SECOND = bandage[1]
+    ADDITIONAL_HEAL = bandage[2]
+    FULL_HP = health
 
     start_time = 0
 
     for attack_time, damage in attacks:
         delta_time = attack_time - start_time
 
-        iter_heal = (delta_time - 1) // wait_time
-        health += heal_full * iter_heal + ((delta_time - 1) % wait_time) * heal_per_second
+        iter_heal = (delta_time - 1) // WAIT_TIME
+        health += ADDITIONAL_HEAL * iter_heal + (delta_time - 1) * HEAL_PER_SECOND
 
-        if health > full_hp:
-            health = full_hp
+        if health > FULL_HP:
+            health = FULL_HP
 
         health -= damage
         start_time = attack_time
