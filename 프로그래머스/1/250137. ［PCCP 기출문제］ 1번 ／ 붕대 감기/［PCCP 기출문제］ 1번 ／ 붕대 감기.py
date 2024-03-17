@@ -10,19 +10,8 @@ def solution(bandage, health, attacks):
     for attack_time, damage in attacks:
         delta_time = attack_time - start_time
 
-        if wait_time <= delta_time:
-            iter_heal = (
-                delta_time // wait_time
-                if delta_time % wait_time != 0
-                else delta_time // wait_time - 1
-            )
-            health += heal_full * iter_heal
-
-        health += (
-            heal_per_second * (delta_time % wait_time - 1)
-            if delta_time % wait_time != 0
-            else heal_per_second * (wait_time - 1)
-        )
+        iter_heal = (delta_time - 1) // wait_time
+        health += heal_full * iter_heal + ((delta_time - 1) % wait_time) * heal_per_second
 
         if health > full_hp:
             health = full_hp
