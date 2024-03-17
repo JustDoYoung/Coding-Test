@@ -1,15 +1,11 @@
 def solution(cards1, cards2, goal):
-    cards1_idx = 0
-    cards2_idx = 0
 
     for word in goal:
-        if word in cards1:
-            if word != cards1[cards1_idx]:
-                return "No"
-            cards1_idx += 1
-        elif word in cards2:
-            if word != cards2[cards2_idx]:
-                return "No"
-            cards2_idx += 1
+        if cards1 and word == cards1[0]:
+            cards1.pop(0)
+        elif cards2 and word == cards2[0]:
+            cards2.pop(0)
+        else:
+            return "No"
     else:
         return "Yes"
