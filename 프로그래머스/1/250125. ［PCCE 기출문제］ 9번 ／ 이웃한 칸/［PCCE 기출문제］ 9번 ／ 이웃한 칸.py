@@ -9,20 +9,9 @@ def solution(board, h, w):
     target_color = set()
     target_color.add(board[h][w])
 
-    if 0 <= y[0] < length and 0 <= x[0] < length:
-        if board[y[0]][x[0]] in target_color:
-            answer += 1
-
-    if 0 <= y[1] < length and 0 <= x[1] < length:
-        if board[y[1]][x[1]] in target_color:
-            answer += 1
-
-    if 0 <= y[2] < length and 0 <= x[2] < length:
-        if board[y[2]][x[2]] in target_color:
-            answer += 1
-
-    if 0 <= y[3] < length and 0 <= x[3] < length:
-        if board[y[3]][x[3]] in target_color:
-            answer += 1
+    for i in range(4):
+        if 0 <= y[i] < length and 0 <= x[i] < length:
+            if board[y[i]][x[i]] in target_color:
+                answer += 1
 
     return answer
