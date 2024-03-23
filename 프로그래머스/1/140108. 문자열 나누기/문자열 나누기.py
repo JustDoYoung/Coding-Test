@@ -4,7 +4,7 @@ def solution(s):
     alpha_1 = s[0]
     count_1, count_2 = 0, 0
 
-    for i, c in enumerate(s):
+    for c in s:
         if alpha_1 == "":
             alpha_1 = c
 
@@ -22,3 +22,7 @@ def solution(s):
             answer += 1
 
     return answer
+
+
+s = "aaabbaccccabba"
+print(solution(s))
