@@ -5,10 +5,10 @@ def solution(s):
 
         item = -1
 
-        if i > 0:
-            temp = s[i - 1 :: -1]
-            if c in temp:
-                item = temp.index(c) + 1
+        for index in range(i - 1, -1, -1):
+            if c == s[index]:
+                item = i - index
+                break
 
         answer.append(item)
 
