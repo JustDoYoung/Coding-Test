@@ -2,7 +2,6 @@ def solution(s):
     answer = []
 
     index_check = {}
-    s_length = len(s)
 
     for i, c in enumerate(s):
 
