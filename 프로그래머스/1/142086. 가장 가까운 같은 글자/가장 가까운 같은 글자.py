@@ -1,14 +1,18 @@
 def solution(s):
     answer = []
 
+    index_check = {}
+    s_length = len(s)
+
     for i, c in enumerate(s):
 
         item = -1
 
-        for index in range(i - 1, -1, -1):
-            if c == s[index]:
-                item = i - index
-                break
+        if index_check.get(c) != None:
+            item = i - index_check[c]
+            index_check[c] = i
+        else:
+            index_check[c] = i
 
         answer.append(item)
 
