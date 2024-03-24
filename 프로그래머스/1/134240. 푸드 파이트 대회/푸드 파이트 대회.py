@@ -1,8 +1,14 @@
 def solution(food):
-    answer ="0"
-    for i in range(len(food)-1, 0,-1):
-        c = int(food[i]/2)
-        while c>0:
-            answer = str(i) + answer + str(i)
-            c -= 1
+    answer = ""
+
+    for i, food_count in enumerate(food):
+        check = food_count // 2
+
+        if check < 1:
+            continue
+
+        answer += str(i) * check
+
+    answer = answer + "0" + answer[::-1]
+
     return answer
