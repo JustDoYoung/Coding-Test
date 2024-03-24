@@ -1,18 +1,15 @@
 def solution(babbling):
     answer = 0
 
-    words = {"aya": 1, "ye": 2, "woo": 3, "ma": 4}
+    words = ("aya", "ye", "woo", "ma")
 
     for bab in babbling:
         for word in words:
-            bab = bab.replace(word, str(words[word]))
+            if word * 2 in bab:
+                continue
+            bab = bab.replace(word, " ")
 
-        check = ""
-        for i in range(0, len(bab)):
-            if bab[i].isdigit() == False or check == bab[i]:
-                break
-            check = bab[i]
-        else:
+        if len(bab.split()) == 0:
             answer += 1
 
     return answer
