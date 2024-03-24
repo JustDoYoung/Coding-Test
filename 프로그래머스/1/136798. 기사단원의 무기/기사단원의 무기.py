@@ -4,13 +4,13 @@ def solution(number, limit, power):
     for knight in range(1, number + 1):
         measure_range = int(knight**(0.5)) + 1
 
-        weapon_power = 0
+        measure = set()
         for num in range(1, measure_range):
             if knight % num == 0:
-                weapon_power += 1
-                if knight // num != num:
-                    weapon_power += 1
+                measure.add(num)
+                measure.add(knight // num)
 
+        weapon_power = len(measure)
         if weapon_power > limit:
             weapon_power = power
 
