@@ -4,12 +4,11 @@ def solution(k, score):
     rank = []
 
     for s in score:
-        if len(rank) < k:
-            rank.append(s)
-            rank.sort()
-        else:
-            if rank[0] < s:
-                rank[0] = s
-                rank.sort()
-        answer.append(rank[0])
+        rank.append(s)
+
+        if len(rank) > k:
+            rank.remove(min(rank))
+
+        answer.append(min(rank))
+
     return answer
