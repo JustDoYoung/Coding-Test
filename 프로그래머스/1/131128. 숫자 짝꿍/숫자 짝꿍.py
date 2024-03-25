@@ -1,4 +1,6 @@
 from collections import Counter
+
+
 def solution(X: str, Y: str):
     answer = ""
 
@@ -7,8 +9,15 @@ def solution(X: str, Y: str):
     x_dict = Counter(X)
     y_dict = Counter(Y)
 
-    for num in num_list:
-        answer += num * min(x_dict[num], y_dict[num])
+    common_nums = [
+        num
+        for num in num_list
+        for _ in range(min(x_dict[num], y_dict[num]))
+        if num in X and num in Y
+    ]
+
+    common_nums = sorted(common_nums, reverse=True)
+    answer = "".join(common_nums)
 
     if len(answer) == 0:
         answer = "-1"
