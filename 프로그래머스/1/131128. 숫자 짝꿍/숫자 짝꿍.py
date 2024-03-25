@@ -1,12 +1,21 @@
-def solution(X, Y):
-    answer = ''
+def solution(X: str, Y: str):
+    answer = ""
 
-    for i in range(9,-1,-1) :
-        answer += (str(i) * min(X.count(str(i)), Y.count(str(i))))
+    num_list = (str(num) for num in range(10))
 
-    if answer == '' :
-        return '-1'
-    elif len(answer) == answer.count('0'):
-        return '0'
-    else :
-        return answer
+    common_nums = [
+        num
+        for num in num_list
+        for _ in range(min(X.count(num), Y.count(num)))
+        if num in X and num in Y
+    ]
+
+    common_nums = sorted(common_nums, reverse=True)
+    answer = "".join(common_nums)
+
+    if len(answer) == 0:
+        answer = "-1"
+    elif answer[0] == "0":
+        answer = "0"
+
+    return answer
