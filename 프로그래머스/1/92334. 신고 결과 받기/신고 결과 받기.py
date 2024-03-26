@@ -1,22 +1,12 @@
 def solution(id_list, report, k):
-    answer = []
+    answer = [0] * len(id_list)    
+    reports = {x : 0 for x in id_list}
 
-    id_dict = dict(zip(id_list, [0] * len(id_list)))
-    report_dict = {}
+    for r in set(report):
+        reports[r.split()[1]] += 1
 
-    for read in report:
-        read = read.split(" ")
+    for r in set(report):
+        if reports[r.split()[1]] >= k:
+            answer[id_list.index(r.split()[0])] += 1
 
-        if report_dict.get(read[1]) != None:
-            report_dict[read[1]].add(read[0])
-        else:
-            report_dict[read[1]] = set()
-            report_dict[read[1]].add(read[0])
-
-    for key, value in report_dict.items():
-        if len(value) >= int(k):
-            for report_person in value:
-                id_dict[report_person] += 1
-
-    answer = list(id_dict.values())
     return answer
