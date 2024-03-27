@@ -1,11 +1,19 @@
 def solution(sizes):
     answer = 0
 
-    sizes = list(map(sorted, sizes))
+    h_max = 0
+    v_max = 0
 
-    h = [x[0] for x in sizes]
-    v = [x[1] for x in sizes]
+    for h, v in sizes:
+        if h < v:
+            h, v = v, h
 
-    answer = max(h) * max(v)
+        if h_max < h:
+            h_max = h
+
+        if v_max < v:
+            v_max = v
+
+    answer = h_max * v_max
 
     return answer
