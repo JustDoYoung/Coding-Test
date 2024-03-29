@@ -1,19 +1,10 @@
 def solution(lottos, win_nums):
-    answer = []
 
-    unrecognizable_count = lottos.count(0)
-    lottos = set(lottos)
-    win_nums = set(win_nums)
+    rank=[6,6,5,4,3,2,1]
 
-    correct_nums = lottos & win_nums
-    correct_nums_count = len(correct_nums)
-
-    max_rank = 6 - (unrecognizable_count+correct_nums_count) + 1
-    min_rank = 6 - (correct_nums_count) + 1
-
-    if max_rank >= 6: max_rank = 6
-    if min_rank >= 6: min_rank = 6
-
-    answer = [max_rank, min_rank]
-    
-    return answer
+    cnt_0 = lottos.count(0)
+    ans = 0
+    for x in win_nums:
+        if x in lottos:
+            ans += 1
+    return rank[cnt_0 + ans],rank[ans]
