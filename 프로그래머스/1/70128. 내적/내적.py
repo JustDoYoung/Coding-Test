@@ -1,8 +1,7 @@
-import numpy
 def solution(a, b):
-    a = numpy.array(a)
-    b = numpy.array(b)
+    answer = 0
 
-    answer = numpy.sum(a * b)
+    for i in range(len(a)):
+        answer += a[i] * b[i]
 
-    return int(answer)
+    return answer
