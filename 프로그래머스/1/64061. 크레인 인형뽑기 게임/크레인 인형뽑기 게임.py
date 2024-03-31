@@ -1,27 +1,24 @@
 def solution(board, moves):
     answer = 0
+    pick_list = []
+    for col in moves:
+        col -= 1
 
-    pick = []
-    board_dict = {move: [] for move in moves}
+        for row in range(len(board)):
 
-    for sub_list in board:
-        for i, item in enumerate(sub_list):
-            if item == 0:
+            if board[row][col] == 0:
                 continue
 
-            board_dict[i + 1].append(item)
+            picked_item = board[row][col]
+            board[row][col] = 0
 
-    for move in moves:
-        if not len(board_dict[move]):
-            continue
+            if len(pick_list):
+                if pick_list[-1] == picked_item:
+                    answer += 2
+                    pick_list.pop()
+                    break
 
-        item = board_dict[move].pop(0)
+            pick_list.append(picked_item)
+            break
 
-        if len(pick):
-            if pick[-1] == item:
-                pick.pop()
-                answer += 2
-                continue
-
-        pick.append(item)
     return answer
