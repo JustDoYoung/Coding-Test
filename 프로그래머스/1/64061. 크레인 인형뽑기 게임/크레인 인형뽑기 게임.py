@@ -1,15 +1,15 @@
-import numpy as np
-
-
 def solution(board, moves):
     answer = 0
 
     pick = []
-    board_arr = np.array(board)
-    board_dict = {
-        i + 1: list(filter(lambda x: x != 0, board_arr[:, i]))
-        for i in range(len(board))
-    }
+    board_dict = {move: [] for move in moves}
+
+    for sub_list in board:
+        for i, item in enumerate(sub_list):
+            if item == 0:
+                continue
+
+            board_dict[i + 1].append(item)
 
     for move in moves:
         if not len(board_dict[move]):
