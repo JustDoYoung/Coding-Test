@@ -1,9 +1,10 @@
 def solution(n, lost, reserve):
     answer = 0
 
-    student = [0] * n
+    student = []
 
     for i in range(n):
+        student.append(0)
         if i + 1 in lost:
             student[i] -= 1
         if i + 1 in reserve:
