@@ -3,11 +3,11 @@ def solution(n, lost, reserve):
 
     student = [0] * n
 
-    for i in lost:
-        student[i - 1] -= 1
-
-    for i in reserve:
-        student[i - 1] += 1
+    for i in range(n):
+        if i + 1 in lost:
+            student[i] -= 1
+        if i + 1 in reserve:
+            student[i] += 1
 
     for i in range(n - 1):
         if student[i] == 0:
