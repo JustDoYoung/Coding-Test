@@ -1,16 +1,15 @@
 def solution(N, stages):
     answer = []
-    faulty = []
+    faulty = {}
 
     player_count = len(stages)
-    for i in range(1, N + 2):
+    for i in range(1, N + 1):
         if player_count == 0:
-            faulty.append(0)
+            faulty[i] = 0
             continue
-        faulty.append(stages.count(i) / player_count)
+        faulty[i] = stages.count(i) / player_count
         player_count -= stages.count(i)
 
-    faulty_dict = {i + 1: faulty[i] for i in range(N)}
-    answer = [item[0] for item in sorted(faulty_dict.items(), key=lambda x: -x[1])]
+    answer = sorted(faulty, key=lambda x: -faulty[x])
 
     return answer
