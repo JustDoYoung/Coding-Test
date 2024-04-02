@@ -1,8 +1,8 @@
 def solution(participant, completion):
     answer = ""
 
-    participant.sort()
-    completion.sort()
+    participant = sorted(participant)
+    completion = sorted(completion)
 
     for i, _ in enumerate(completion):
         if participant[i] != completion[i]:
