@@ -1,4 +1,5 @@
 def solution(answers):
+    answer = []
     supo_1 = [1, 2, 3, 4, 5]
     supo_2 = [2, 1, 2, 3, 2, 4, 2, 5]
     supo_3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
@@ -14,6 +15,9 @@ def solution(answers):
             supo_score[3] += 1
 
     supo_score = sorted(supo_score.items(), key=lambda x: -x[1])
-    rank = dict(filter(lambda x: x[1] == supo_score[0][1], supo_score))
 
-    return list(rank.keys())
+    for supo, score in supo_score:
+        if supo_score[0][1] == score:
+            answer.append(supo)
+
+    return answer
