@@ -5,14 +5,9 @@ def solution(n, arr1, arr2):
         bin_cross = str(bin(arr1[i] | arr2[i]))
 
         bin_cross = bin_cross[2:].zfill(n)
+        bin_cross = bin_cross.replace("1", "#")
+        bin_cross = bin_cross.replace("0", " ")
 
-        temp = ""
-        for b in bin_cross:
-            if b == "1":
-                temp += "#"
-            else:
-                temp += " "
-
-        answer.append(temp)
+        answer.append(bin_cross)
 
     return answer
