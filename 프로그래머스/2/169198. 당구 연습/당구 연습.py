@@ -2,7 +2,6 @@ def solution(m, n, startX, startY, balls):
     answer = []
 
     reflect_lst = []
-    edge_reflect_lst = []
 
     reflect_hor = [-2 * startX, 0, 2 * (m - startX), 0]
     reflect_ver = [0, 2 * (n - startY), 0, -2 * startY]
