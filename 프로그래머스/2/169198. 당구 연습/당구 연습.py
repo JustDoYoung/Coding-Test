@@ -6,18 +6,9 @@ def solution(m, n, startX, startY, balls):
 
     reflect_hor = [-2 * startX, 0, 2 * (m - startX), 0]
     reflect_ver = [0, 2 * (n - startY), 0, -2 * startY]
-    reflect_edge = [
-        [-2 * startX, -2 * startY],
-        [-2 * startX, 2 * (n - startY)],
-        [2 * (m - startX), 2 * (n - startY)],
-        [2 * (m - startX), -2 * startY],
-    ]
 
     for i in range(4):
         reflect_lst.append([startX + reflect_hor[i], startY + reflect_ver[i]])
-        edge_reflect_lst.append(
-            [startX + reflect_edge[i][0], startY + reflect_edge[i][1]]
-        )
 
     for ball in balls:
         min_value = 2*1000**2
