@@ -1,19 +1,13 @@
-#include <iostream>
+#include <stdio.h>
 
-using namespace std;
-
-int main() {
-	cin.tie(NULL);
-	ios_base::sync_with_stdio(false);
-
-	int item, n, target;
-	cin >> n >> target;
-
-	while (n--) {
-		cin >> item;
-		if (item < target)
-			cout << item << ' ';
+int main()
+{
+	int n, x;
+	scanf("%d%d", &n, &x);
+	for(int i = 0, a; i < n; ++i) {
+		scanf("%d", &a);
+		if(a < x)
+			printf("%d ", a);
 	}
-	
 	return 0;
 }
