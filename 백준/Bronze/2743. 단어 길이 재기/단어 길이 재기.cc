@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 int main() {
@@ -8,13 +9,7 @@ int main() {
 	char input[101];
 	cin >> input;
 
-	int len = 0;
-	while (true) {
-		if (input[len] == '\0') break;
-		len++;
-	}
-
-	cout << len << endl;
+	cout << strlen(input) << endl;
 
 	return 0;
 }
