@@ -9,21 +9,19 @@ int main() {
 	cin.getline(input, 1000001);
 	
 	int count = 0;
-	int idx = 0;
 	bool check = false;
 
-	while (true) {
-		if (input[idx] == '\0') break;
+	for(int i = 0; i < 1000001; i++){
 
-		if (isalpha(input[idx]) && !check) {
+		if (input[i] == '\0') break;
+
+		if (isalpha(input[i]) && !check) {
 			count++;
 			check = true;
 		}
-		else if (!isalpha(input[idx]) && check) {
+		else if (!isalpha(input[i]) && check) {
 			check = false;
 		}
-
-		idx++;
 	}
 
 	cout << count << endl;
