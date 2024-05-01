@@ -11,7 +11,6 @@ int main() {
 	
 	int len = strlen(input);
 	int count = 1;
-	bool check = false;
 
 	for(int i = 0; input[i]; i++)
 		if (input[i] == ' ') count++;
