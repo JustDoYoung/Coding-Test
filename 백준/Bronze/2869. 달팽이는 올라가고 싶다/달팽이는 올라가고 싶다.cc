@@ -10,22 +10,7 @@ int main()
 	int up, down, height;
 	cin >> up >> down >> height;
 
-	int day = 0;
-	int snail = 0;
-
-	while (true)
-	{
-		if (height <= up)
-			break;
-
-		int temp = height / up;
-		day += temp;
-		height += down * temp;
-		height -= up * temp;
-	}
-
-	if (height > 0)
-		day++;
+	int day = (height - down - 1) / (up - down) + 1;
 
 	cout << day << endl;
 
