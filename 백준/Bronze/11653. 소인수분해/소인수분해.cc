@@ -11,17 +11,17 @@ int main()
 	int input;
 	cin >> input;
 
-	int n = 2;
-	while (input != 1)
+	for (int n = 2; n * n <= input; n++)
 	{
-		if (input % n == 0)
+		while (input % n == 0)
 		{
 			input /= n;
 			cout << n << endl;
 		}
-		else
-			n++;
 	}
+
+	if (input > 1)
+		cout << input << endl;
 
 	return 0;
 }
