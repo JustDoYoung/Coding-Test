@@ -20,29 +20,32 @@ int main()
     int n;
     cin >> n;
 
-    vector<int> v;
-    vector<int> v2;
-
-    while (n--)
+    vector<pair<int, int>> v(n);
+    for (int i = 0; i < n; i++)
     {
         int input;
         cin >> input;
 
-        v.push_back(input);
+        v[i] = {input, i};
     }
 
-    v2 = v;
+    sort(v.begin(), v.end());
 
-    sort(v2.begin(), v2.end());
-    auto e = unique(v2.begin(), v2.end());
+    vector<int> v2(n);
+    int prev = INT32_MAX;
+    int count = -1;
 
-    map<int, int> m;
+    for (int i = 0; i < n; i++)
+    {
+        if (prev != v[i].first)
+            count++;
 
-    for (int i = 0; i < e - v2.begin(); i++)
-        m.insert({v2[i], i});
+        v2[v[i].second] = count;
+        prev = v[i].first;
+    }
 
-    for (int i : v)
-        cout << m[i] << ' ';
+    for (int i : v2)
+        cout << i << ' ';
 
     return 0;
 }
