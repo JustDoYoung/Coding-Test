@@ -14,8 +14,8 @@ int main()
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    int r = 31;
-    int m = 1234567891;
+    const int r = 31;
+    const int m = 1234567891;
 
     int l;
     cin >> l;
@@ -26,11 +26,17 @@ int main()
     unsigned long long sum = 0;
     for (int i = 0; i < l; i++)
     {
-        int x = input[i] - 'a' + 1;
-        sum += x * pow(r, i);
+        unsigned long long x = input[i] - 'a' + 1;
+        for (int j = 0; j < i; j++)
+        {
+            x *= r;
+            x %= m;
+        }
+        sum += x;
+        sum %= m;
     }
 
-    cout << sum % m << '\n';
+    cout << sum << '\n';
 
     return 0;
 }
