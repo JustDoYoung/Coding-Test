@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 19980 KB, 시간: 128 ms
+메모리: 20660 KB, 시간: 124 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 6월 23일 20:48:42
+2024년 7월 18일 09:33:57
 
 ### 문제 설명
 
@@ -50,7 +50,7 @@
 
 <p>이다솜 : 네. 야호!!</p>
 
-<p>'<img alt="" src="https://www.acmicpc.net/upload/201004/p3.PNG" style="height:181px; width:274px"></p>
+<p>'<img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>오영식 : 어? 오박사님 얘는 누구인가요?</p>
 
@@ -100,11 +100,11 @@
 
 <p>이다솜 : 헐랭... 나를 우습게보네.... 한번 두고 보시지! 그럼 대결이닷!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pb.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pc.PNG" style="height:183px; width:274px"></p>
+<p><img alt="" src="" style="height:183px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pd.PNG" style="height:182px; width:274px"></p>
+<p><img alt="" src="" style="height:182px; width:274px"></p>
 
 <p><img alt="" src="https://www.acmicpc.net/upload/201004/pe.PNG" style="height:183px; width:274px"></p>
 

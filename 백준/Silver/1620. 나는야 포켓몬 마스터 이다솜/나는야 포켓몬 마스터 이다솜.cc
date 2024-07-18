@@ -2,6 +2,9 @@
 
 using namespace std;
 
+unordered_map<string, int> names;
+string keys[100004];
+
 int main()
 {
     cin.tie(NULL);
@@ -10,17 +13,13 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    vector<string> v;
-    unordered_map<string, int> um;
-
-    int idx = 0;
-    while (n--)
+    for (int i = 1; i <= n; i++)
     {
         string input;
         cin >> input;
 
-        v.push_back(input);
-        um.insert({input, idx++});
+        names.insert({input, i});
+        keys[i] = input;
     }
 
     while (m--)
@@ -28,14 +27,15 @@ int main()
         string input;
         cin >> input;
 
-        if (isdigit(input[0]))
+        int check = atoi(input.c_str());
+
+        if (check == 0)
         {
-            int i = stoi(input) - 1;
-            cout << v[i] << '\n';
+            cout << names[input] << '\n';
         }
         else
         {
-            cout << um[input] + 1 << '\n';
+            cout << keys[check] << '\n';
         }
     }
 
