@@ -2,29 +2,30 @@
 
 using namespace std;
 
-pair<int, int> check[44];
+pair<int, int> arr[44];
+int T;
+
 int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    int n;
-    cin >> n;
-
-    check[0] = {1, 0};
-    check[1] = {0, 1};
+    arr[0] = {1, 0};
+    arr[1] = {0, 1};
 
     for (int i = 2; i < 41; i++)
     {
-        check[i] = {check[i - 2].first + check[i - 1].first, check[i - 2].second + check[i - 1].second};
+        arr[i] = {arr[i - 2].first + arr[i - 1].first, arr[i - 2].second + arr[i - 1].second};
     }
 
-    while (n--)
+    cin >> T;
+
+    while (T--)
     {
         int input;
         cin >> input;
 
-        cout << check[input].first << ' ' << check[input].second << '\n';
+        cout << arr[input].first << ' ' << arr[input].second << '\n';
     }
 
     return 0;
