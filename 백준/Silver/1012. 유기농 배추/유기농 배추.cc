@@ -1,68 +1,72 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 
 using namespace std;
 
+int T, N, M, K;
+int cnt = 0;
+
+int dirY[] = {1, 0, -1, 0};
+int dirX[] = {0, 1, 0, -1};
+
+void dfs(int arr[][54], bool visited[][54], int y, int x)
+{
+    if (visited[y][x])
+        return;
+
+    visited[y][x] = 1;
+
+    for (int i = 0; i < 4; i++)
+    {
+        int dy = y + dirY[i];
+        int dx = x + dirX[i];
+
+        if (dy < 0 || dy >= N || dx < 0 || dx >= M)
+            continue;
+        if (visited[dy][dx])
+            continue;
+        if (arr[dy][dx] == 0)
+            continue;
+
+        dfs(arr, visited, dy, dx);
+    }
+}
 int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    int n;
-    cin >> n;
+    cin >> T;
 
-    int deltaX[4] = {-1, 0, 1, 0};
-    int deltaY[4] = {0, -1, 0, 1};
-
-    while (n--)
+    while (T--)
     {
-        int m, n, k;
-        cin >> m >> n >> k;
+        cin >> M >> N >> K;
 
-        int check[2504]{false};
-        int count = 0;
-        while (k--)
+        int arr[54][54] = {0};
+        bool visited[54][54] = {0};
+
+        for (int i = 0; i < K; i++)
         {
-            int x, y;
+            int y, x;
             cin >> x >> y;
 
-            check[x + m * y] = true;
+            arr[y][x] = 1;
         }
 
-        stack<int> s;
-
-        for (int i = 0; i < m * n; i++)
+        for (int j = 0; j < N; j++)
         {
-            if (check[i] == false)
-                continue;
-
-            count++;
-            s.push(i);
-
-            while (!s.empty())
+            for (int i = 0; i < M; i++)
             {
-                check[s.top()] = false;
-                int x = s.top() % m;
-                int y = s.top() / m;
-                s.pop();
+                if (visited[j][i])
+                    continue;
+                if (arr[j][i] == 0)
+                    continue;
 
-                for (int j = 0; j < 4; j++)
-                {
-                    int dx = x + deltaX[j];
-                    int dy = y + deltaY[j];
-
-                    if (dx < 0 || dx >= m)
-                        continue;
-                    if (dy < 0 || dy >= n)
-                        continue;
-
-                    if (check[dx + m * dy])
-                        s.push(dx + m * dy);
-                }
+                dfs(arr, visited, j, i);
+                cnt++;
             }
         }
 
-        cout << count << '\n';
+        cout << cnt << '\n';
+        cnt = 0;
     }
-
-    return 0;
 }
