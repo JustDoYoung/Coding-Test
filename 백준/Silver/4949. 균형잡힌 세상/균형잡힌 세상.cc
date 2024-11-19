@@ -2,22 +2,6 @@
 
 using namespace std;
 
-bool Check(stack<char> &s, char target)
-{
-    if (s.empty())
-    {
-        s.push('x');
-        return true;
-    }
-
-    if (s.top() == target)
-        s.pop();
-    else
-        return true;
-
-    return false;
-}
-
 int main()
 {
     cin.tie(NULL);
@@ -28,37 +12,44 @@ int main()
         string input;
         getline(cin, input);
 
-        if (input[0] == '.')
+        if (input == ".")
             break;
 
         stack<char> s;
-        for (char i : input)
-        {
-            if (isalpha(i) || i == ' ')
-                continue;
-            if (i == '.')
-                break;
 
-            if (i == ')')
+        for (char c : input)
+        {
+            if (c == '(' || c == '[')
             {
-                if (Check(s, '('))
-                    break;
+                s.push(c);
             }
-            else if (i == ']')
+            else if (c == ')')
             {
-                if (Check(s, '['))
+                if (s.empty() || s.top() != '(')
+                {
+                    s.push(c);
                     break;
+                }
+                else
+                    s.pop();
             }
-            else
+            else if (c == ']')
             {
-                s.push(i);
+                if (s.empty() || s.top() != '[')
+                {
+                    s.push(c);
+                    break;
+                }
+                else
+                    s.pop();
             }
         }
 
         if (s.empty())
-            cout << "yes" << '\n';
+            cout << "yes\n";
         else
-            cout << "no" << '\n';
+            cout << "no\n";
     }
+
     return 0;
 }
