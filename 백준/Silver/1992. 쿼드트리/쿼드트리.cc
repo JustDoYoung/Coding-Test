@@ -1,37 +1,37 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 
 using namespace std;
 
 int N;
-char arr[70][70] = {'0'};
+char arr[65][65];
 
-string solve(int y, int x, int width)
+string quad(int y, int x, int w)
 {
-    if (width == 1)
-        return string(1, arr[y][x]);
+    int node = arr[y][x];
+    string ret = "";
 
-    char now = arr[y][x];
-    string ans = "";
+    if (w == 1)
+        return string(1, node);
 
-    for (int j = y; j < y + width; j++)
+    for (int j = y; j < y + w; j++)
     {
-        for (int i = x; i < x + width; i++)
+        for (int i = x; i < x + w; i++)
         {
-            if (now != arr[j][i])
+            if (arr[j][i] != node)
             {
-                ans += '(';
-                ans += solve(y, x, width / 2);
-                ans += solve(y, x + width / 2, width / 2);
-                ans += solve(y + width / 2, x, width / 2);
-                ans += solve(y + width / 2, x + width / 2, width / 2);
-                ans += ')';
+                ret += "(";
+                ret += quad(y, x, w / 2);
+                ret += quad(y, x + w / 2, w / 2);
+                ret += quad(y + w / 2, x, w / 2);
+                ret += quad(y + w / 2, x + w / 2, w / 2);
+                ret += ")";
 
-                return ans;
+                return ret;
             }
         }
     }
 
-    return string(1, arr[y][x]);
+    return string(1, node);
 }
 
 int main()
@@ -41,16 +41,18 @@ int main()
 
     cin >> N;
 
-    for (int j = 0; j < N; j++)
+    for (int i = 0; i < N; i++)
     {
         string input;
         cin >> input;
 
-        for (int i = 0; i < N; i++)
-            arr[j][i] = input[i];
+        for (int j = 0; j < N; j++)
+        {
+            arr[i][j] = input[j];
+        }
     }
 
-    cout << solve(0, 0, N) << '\n';
+    cout << quad(0, 0, N) << '\n';
 
     return 0;
 }
