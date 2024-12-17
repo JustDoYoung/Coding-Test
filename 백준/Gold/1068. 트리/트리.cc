@@ -2,68 +2,50 @@
 
 using namespace std;
 
-const int blank = -100;
-int N, start;
-vector<int> arr[54];
+int n, root, rmv, cnt;
+vector<int> v[54];
 
-int solve(int idx)
+void dfs(int node)
 {
-    int cnt = 0;
+    if (node == rmv)
+        return;
 
-    stack<int> s;
-    s.push(start);
-
-    while (!s.empty())
+    int child = 0;
+    for (int i = 0; i < v[node].size(); i++)
     {
-        int now = s.top();
-        s.pop();
-
-        if (now == idx)
+        if (v[node][i] == rmv)
             continue;
 
-        for (int i = 0; i < arr[now].size(); i++)
-        {
-            if (arr[now][i] == idx)
-            {
-                arr[now].erase(arr[now].begin() + i--);
-                continue;
-            }
-
-            s.push(arr[now][i]);
-        }
-
-        if (arr[now].size() == 0)
-            cnt++;
+        child++;
+        dfs(v[node][i]);
     }
 
-    return cnt;
+    if (child == 0)
+        cnt++;
 }
-
 int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    cin >> N;
+    cin >> n;
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < n; i++)
     {
         int input;
         cin >> input;
 
         if (input == -1)
-        {
-            start = i;
-            continue;
-        }
+            root = i;
 
-        arr[input].push_back(i);
+        v[input].push_back(i);
     }
 
-    int idx;
-    cin >> idx;
+    cin >> rmv;
 
-    cout << solve(idx) << '\n';
+    dfs(root);
+
+    cout << cnt << '\n';
 
     return 0;
 }
