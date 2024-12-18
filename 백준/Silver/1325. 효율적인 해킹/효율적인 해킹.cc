@@ -2,27 +2,27 @@
 
 using namespace std;
 
-int N, M;
-vector<int> arr[10004];
-int dp[10004];
+int n, m;
+vector<int> adj[10004];
 bool visited[10004];
+int dp[10004];
 
-int dfs(int x)
+int dfs(int n)
 {
-    int ret = 1;
-    visited[x] = true;
-    if (arr[x].size() == 0)
-        return ret;
+    int cnt = 1;
+    visited[n] = true;
 
-    for (int i = 0; i < arr[x].size(); i++)
+    for (int i = 0; i < adj[n].size(); i++)
     {
-        if (visited[arr[x][i]])
+        int next = adj[n][i];
+
+        if (visited[next])
             continue;
 
-        ret += dfs(arr[x][i]);
+        cnt += dfs(next);
     }
 
-    return ret;
+    return cnt;
 }
 
 int main()
@@ -30,27 +30,30 @@ int main()
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    cin >> N >> M;
+    cin >> n >> m;
 
-    for (int i = 0; i < M; i++)
+    while (m--)
     {
         int a, b;
         cin >> a >> b;
-        arr[b].push_back(a);
+        adj[b].push_back(a);
     }
 
     int mx = 0;
-    for (int i = 1; i <= N; i++)
+    for (int i = 1; i <= n; i++)
     {
         fill(&visited[0], &visited[0] + 10004, false);
+
         dp[i] = dfs(i);
         mx = max(mx, dp[i]);
     }
 
-    for (int i = 1; i <= N; i++)
+    for (int i = 1; i <= n; i++)
     {
-        if (mx == dp[i])
+        if (dp[i] == mx)
+        {
             cout << i << " ";
+        }
     }
 
     return 0;
