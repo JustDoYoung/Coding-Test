@@ -2,38 +2,40 @@
 
 using namespace std;
 
-int N;
-int nums[1000001];
-int dp[1000001];
-vector<int> store;
+int n;
+vector<int> v;
+int ans[1000004];
 
 int main()
 {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    cin >> N;
+    cin >> n;
 
-    fill(&dp[0], &dp[0] + 1000001, -1);
+    fill(&ans[0], &ans[0] + 1000004, -1);
 
-    for (int i = 0; i < N; i++)
+    stack<int> s;
+
+    for (int i = 0; i < n; i++)
     {
-        cin >> nums[i];
+        int input;
+        cin >> input;
 
-        while (true)
+        v.push_back(input);
+        while (!s.empty() && v[s.top()] < input)
         {
-            if (store.empty() || nums[store.back()] >= nums[i])
-                break;
-
-            dp[store.back()] = nums[i];
-            store.pop_back();
+            ans[s.top()] = input;
+            s.pop();
         }
 
-        store.push_back(i);
+        s.push(i);
     }
 
-    for (int i = 0; i < N; i++)
-        cout << dp[i] << ' ';
+    for (int i = 0; i < n; i++)
+    {
+        cout << ans[i] << " ";
+    }
 
     return 0;
 }
