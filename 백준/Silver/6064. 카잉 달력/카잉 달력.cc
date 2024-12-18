@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int t, m, n, x, y, doom;
+int t;
 
 int main()
 {
@@ -13,24 +13,24 @@ int main()
 
     while (t--)
     {
+        int m, n, x, y;
         cin >> m >> n >> x >> y;
 
-        doom = m * n / __gcd(m, n);
+        int doom = m * n / __gcd(m, n);
 
         int day = x;
         while (day <= doom)
         {
             if ((day - 1) % n + 1 == y)
-            {
-                cout << day << '\n';
                 break;
-            }
 
             day += m;
         }
 
         if (day > doom)
             cout << -1 << '\n';
+        else
+            cout << day << '\n';
     }
 
     return 0;
