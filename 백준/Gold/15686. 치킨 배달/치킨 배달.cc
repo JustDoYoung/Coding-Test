@@ -2,29 +2,34 @@
 
 using namespace std;
 
-int N, M, ans = INT32_MAX;
+int n, m, ans = INT32_MAX;
+int grid[54][54];
 vector<pair<int, int>> house;
 vector<pair<int, int>> chicken;
 
-void combination(vector<pair<int, int>> v, int s)
+void combination(vector<pair<int, int>> &v, int s)
 {
-    if (v.size() == M)
+    if (v.size() == m)
     {
-        int dist[104];
-        fill(&dist[0], &dist[0] + 104, INT32_MAX);
-
+        vector<int> dist(house.size(), INT32_MAX);
         for (int i = 0; i < house.size(); i++)
         {
-            for (int j = 0; j < v.size(); j++)
+            for (auto c : v)
             {
-                int dx = abs(house[i].first - v[j].first);
-                int dy = abs(house[i].second - v[j].second);
+                int dx = abs(house[i].first - c.first);
+                int dy = abs(house[i].second - c.second);
 
                 dist[i] = min(dist[i], dx + dy);
             }
         }
 
-        ans = min(ans, accumulate(&dist[0], &dist[0] + house.size(), 0));
+        int sum = 0;
+        for (int i = 0; i < dist.size(); i++)
+        {
+            sum += dist[i];
+        }
+
+        ans = min(ans, sum);
 
         return;
     }
@@ -42,27 +47,26 @@ int main()
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
 
-    cin >> N >> M;
+    cin >> n >> m;
 
-    for (int i = 1; i <= N; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 1; j <= N; j++)
+        for (int j = 0; j < n; j++)
         {
-            int input;
-            cin >> input;
-
-            if (input == 1)
+            cin >> grid[i][j];
+            if (grid[i][j] == 1)
             {
                 house.push_back({i, j});
             }
-            else if (input == 2)
+            else if (grid[i][j] == 2)
             {
                 chicken.push_back({i, j});
             }
         }
     }
 
-    combination(vector<pair<int, int>>(), 0);
+    vector<pair<int, int>> v;
+    combination(v, 0);
 
     cout << ans << '\n';
 
